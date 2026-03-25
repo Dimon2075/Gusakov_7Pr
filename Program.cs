@@ -1,113 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ConsoleApp_FirstApp
+class ArrayExample
 {
     /// <summary>
-    /// Основная программа, которая запускается при запуске приложения.
+    /// Точка входа в программу.
+    /// Создаёт массив букв, формирует строку имени и заполняет массив чисел.
+    /// Затем вызывает метод SendMessage для каждого элемента.
     /// </summary>
-    class Program
+    static void Main()
     {
-        /// <summary>
-        /// Главный входной метод программы.
-        /// </summary>
-        /// <param name="args">Массив строковых аргументов командной строки.</param>
-        static void Main(string[] args)
+        // Массив букв
+        char[] letters = { 'f', 'r', 'e', 'd', ' ', 's', 'm', 'i', 't', 'h' };
+        // Строка для имени
+        string name = "";
+        // Массив целых чисел длиной 10
+        int[] a = new int[10];
+
+        // Цикл по всем буквам массива
+        for (int i = 0; i < letters.Length; i++)
         {
-            Console.WriteLine("Welcome to Galaxy News!");
-            IterateThroughList();
-            Console.ReadKey();
+            // Добавляем текущий символ к имени
+            name += letters[i];
+            // Заполняем массив числами от 1 до 10
+            a[i] = i + 1;
+            // Вызываем метод для вывода сообщения
+            SendMessage(name, a[i]);
         }
-
-        /// <summary>
-        /// Метод для итерации по списку галактик и вывода информации о них.
-        /// </summary>
-        private static void IterateThroughList()
-        {
-            var theGalaxies = new List<Galaxy>
-            {
-                new Galaxy() { Name="Tadpole", MegaLightYears=400, GalaxyType=new GType('S')},
-                new Galaxy() { Name="Pinwheel", MegaLightYears=25, GalaxyType=new GType('S')},
-                new Galaxy() { Name="Cartwheel", MegaLightYears=500, GalaxyType=new GType('L')},
-                new Galaxy() { Name="Small Magellanic Cloud", MegaLightYears=.2, GalaxyType=new GType('I')},
-                new Galaxy() { Name="Andromeda", MegaLightYears=3, GalaxyType=new GType('S')},
-                new Galaxy() { Name="Maffei 1", MegaLightYears=11, GalaxyType=new GType('E')}
-            };
-
-            foreach (Galaxy theGalaxy in theGalaxies)
-            {
-                Console.WriteLine(theGalaxy.Name + "  " + theGalaxy.MegaLightYears + ",  " + theGalaxy.GalaxyType.MyGType);
-            }
-
-            // Ожидаемый вывод:
-            //  Tadpole  400,  Spiral
-            //  Pinwheel  25,  Spiral
-            //  Cartwheel, 500,  Lenticular
-            //  Small Magellanic Cloud .2,  Irregular
-            //  Andromeda  3,  Spiral
-            //  Maffei 1,  11,  Elliptical
-        }
+        // Ожидание нажатия клавиши, чтобы окно не закрывалось
+        Console.ReadKey();
     }
 
     /// <summary>
-    /// Класс, представляющий галактику.
+    /// Выводит сообщение с именем и числом.
     /// </summary>
-    public class Galaxy
+    /// <param name="name">Имя, сформированное из массива букв.</param>
+    /// <param name="msg">Число, передаваемое в сообщение.</param>
+    static void SendMessage(string name, int msg)
     {
-        /// <summary>
-        /// Название галактики.
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Расстояние до галактики в миллионах световых лет.
-        /// </summary>
-        public double MegaLightYears { get; set; }
-
-        /// <summary>
-        /// Тип галактики.
-        /// </summary>
-        public GType GalaxyType { get; set; }
-    }
-
-    /// <summary>
-    /// Класс, представляющий тип галактики.
-    /// </summary>
-    public class GType
-    {
-        /// <summary>
-        /// Создает новый тип галактики на основе символьного кода.
-        /// </summary>
-        /// <param name="type">Символьный код типа: 'S' (спираль), 'E' (эллиптическая), 'I' (неправильная), 'L' (ланцетная).</param>
-        public GType(char type)
-        {
-            switch (type)
-            {
-                case 'S':
-                    MyGType = Type.Spiral;
-                    break;
-                case 'E':
-                    MyGType = Type.Elliptical;
-                    break;
-                case 'I':
-                    MyGType = Type.Irregular;
-                    break;
-                case 'L':
-                    MyGType = Type.Lenticular;
-                    break;
-                default:
-                    throw new ArgumentException("Неверный код типа галактики");
-            }
-        }
-
-        /// <summary>
-        /// Свойство, хранящее тип галактики.
-        /// </summary>
-        public object MyGType { get; set; }
-
-        /// <summary>
-        /// Перечисление, определяющее возможные типы галактик.
-        /// </summary>
-        private enum Type { Spiral, Elliptical, Irregular, Lenticular }
+        Console.WriteLine("Hello, " + name + "! Count to " + msg);
     }
 }
